@@ -46,6 +46,10 @@ keywords: vim, markdown, toc
 
 除非是在配置里关闭了保存时自动更新，并且维持插入 Table of Contents 前后的 `<!-- vim-markdown-toc -->`，此时可使用 `:UpdateToc` 命令手动更新。
 
+### 删除 Table of Contents
+
+`:RemoveToc` 命令可以帮你删除本插件生成的 Table of Contents。
+
 ## 安装方法
 
 推荐使用 [Vundle](http://github.com/VundleVim/Vundle.Vim) 来管理你的 Vim 插件，这样你就可以简单三步完成安装：
@@ -88,17 +92,49 @@ keywords: vim, markdown, toc
 
    需要注意的是移除之后插件将无法再帮你保存文件时自动更新 Table of Contents 了，也无法使用 `:UpdateToc` 命令了。这里如果还想更新 Table of Contents，只能先手动删除已经存在的，然后重新运行 `:GenTocXXX` 命令。
 
+3. `g:vmt_cycle_list_item_markers`
+
+   默认值：0
+
+   在默认情况下，所有 Table of Contents 项目前面的标记都是 `*`：
+
+   ```
+   * [Level 1](#level-1)
+       * [Level 1-1](#level-1-1)
+       * [Level 1-2](#level-1-2)
+           * [Level 1-2-1](#level-1-2-1)
+   * [Level 2](level-2)
+   ```
+
+   这里提供一个选项改变这个行为，如果设置：
+
+   ```viml
+   let g:vmt_cycle_list_item_markers = 1
+   ```
+
+   那标记将根据级别循环使用 `*`、`-` 和 `+`：
+
+   ```
+   * [Level 1](#level-1)
+       - [Level 1-1](#level-1-1)
+       - [Level 1-2](#level-1-2)
+           + [Level 1-2-1](#level-1-2-1)
+   * [Level 2](level-2)
+   ```
+
+   这不会影响 Markdown 文档解析后的显示效果，只用于提升源文件的可读性。
+
 ## 屏幕截图
 
 [使用本插件生成 TOC 的英文文档在线示例](https://github.com/mzlogin/chinese-copywriting-guidelines/blob/Simplified/README.en.md)
 
 ![](https://github.com/mzlogin/vim-markdown-toc/raw/master/screenshots/english.gif)
 
-[使用本插件生成 TOC 的中文文档在线示例](http://mazhuang.org/wiki/chinese-copywriting-guidelines/)
+[使用本插件生成 TOC 的中文文档在线示例](https://mazhuang.org/wiki/chinese-copywriting-guidelines/)
 
 ![](https://github.com/mzlogin/vim-markdown-toc/raw/master/screenshots/chinese.gif)
 
 ## 参考链接
 
-* [GFM 与 Redcarpet 的不同点](http://mazhuang.org/2015/12/05/diff-between-gfm-and-redcarpet/)
+* [GFM 与 Redcarpet 的不同点](https://mazhuang.org/2015/12/05/diff-between-gfm-and-redcarpet/)
 * [ajorgensen/vim-markdown-toc](https://github.com/ajorgensen/vim-markdown-toc)

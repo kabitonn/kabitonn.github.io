@@ -82,3 +82,5 @@ keywords: C++, Java
 * foreach 循环仅适用于实现了 Iterable 接口的 Java array 和 Collection 类。
 
 * 遍历任何 Collection（例如 Map、Set 或 List）时要删除元素只能使用 Iterator 的 remove 方法。
+
+* 包名不能使用关键字，比如 switch 和 return 等，参见 [7.4.1. Named Packages](http://docs.oracle.com/javase/specs/jls/se8/html/jls-7.html#jls-7.4.1) 和 [3.8. Identifiers](http://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-Identifier)。

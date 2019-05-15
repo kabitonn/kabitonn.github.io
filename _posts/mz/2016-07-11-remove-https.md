@@ -6,6 +6,8 @@ description: 收到 Kloudsec 将停止服务的消息，决定将 GitHub Pages �
 keywords: Kloudsec, GitHub Pages
 ---
 
+**Update 2018/05/01: GitHub 官方已经支持自定义域名启用 HTTPS 了，见 <https://blog.github.com/2018-05-01-github-pages-custom-domains-https/>**
+
 前天收到来自 Kloudsec 的邮件，说 Kloudsec 将于 2016/08/01 停止服务。Bad news，请容许我做一个悲伤的表情。
 
 ## 邮件原文
@@ -71,7 +73,7 @@ keywords: Kloudsec, GitHub Pages
 
 Sigh!
 
-想起五月份的时候我还欢天喜地地给博客 HTTPS 化了，并为此写了一篇博客 [为绑定域名的 GitHub Pages 启用 HTTPS](http://mazhuang.org/2016/05/21/enable-https-for-github-pages/)，还将它推荐到了 [掘金](http://gold.xitu.io/entry/574f7ea17db2a20055c3b818/detail)，收获了 64 次收藏，并在那篇文章下创下了我个人博客单篇评论数最多的记录。
+想起五月份的时候我还欢天喜地地给博客 HTTPS 化了，并为此写了一篇博客 [为绑定域名的 GitHub Pages 启用 HTTPS](https://mazhuang.org/2016/05/21/enable-https-for-github-pages/)，还将它推荐到了 [掘金](http://gold.xitu.io/entry/574f7ea17db2a20055c3b818/detail)，收获了 64 次收藏，并在那篇文章下创下了我个人博客单篇评论数最多的记录。
 
 没想到还没等到 Kloudsec 第一次为我的域名证书自动续期，它家的服务就要关停了。
 

@@ -13,7 +13,7 @@ keywords: Windows, Skill
 
 ### Win7 不按 Shift，右键显示 "在此处打开命令窗口 (W)"
 
-<img src="/images/posts/windowsskill/rclick.png" alt="Windows Skills" />
+<img src="/images/posts/windows/rclick.png" alt="Windows Skills" />
 
 图上的这条右键命令一般在 Win7 下是需要 Shift + 右键在弹出菜单里才能看到的，怎么省掉这个 Shift，直接就能出来呢？
 
@@ -94,3 +94,33 @@ Scancode Map 这个键值的讲解实例参见 [Keyboard and mouse class drivers
 | 0x00000002 | 2 条映射条目（包括结尾的 null 条目）。   |
 | 0x003a001d | Caps Lock --> Left Ctrl (0x3a --> 0x1d). |
 | 0x00000000 | 终止符，即 null 条目。                   |
+
+### 将任务栏库图标变成打开计算机
+
+1. 右键任务栏库图标，右键弹出菜单里的“Windows 资源管理器”，单击“属性”。
+
+   ![](/images/posts/windows/library-to-computer-step-1.jpg)
+
+2. 在弹出对话框里将“目标”一栏的 `%windir%\explorer.exe` 改为 `%windir%\explorer.exe ,`，即加上一个空格一个逗号。
+
+   ![](/images/posts/windows/library-to-computer-step-2.png)
+
+参考：[如何将Win7/Win8任务栏库图标变为打开计算机](http://jingyan.baidu.com/article/046a7b3ee71d61f9c27fa91a.html)
+
+### Win10 x64 下使用 ComMonitor
+
+ComMonitor 算是比较好用的串口调试工具了，但是已经很久没有更新，在 Win10 下无法直接使用，打开会弹出错误提示：
+
+```
+没有找到 C:\Windows\system32\msrd3x43.dll
+```
+
+要在 Win10 64 位操作系统下正常使用 ComMonitor 的步骤是：
+
+1. 下载 msrd3x43.dll，放到 C:\Windows\SysWOW64 下；
+
+2. 右键 ComMonitor.exe -- 属性 -- 兼容性 -- 以兼容模式运行这个程序，选择 “Windows XP (Service Pack 2)”，应用。
+
+我使用的 ComMinotor v4.5 版本及 msrd3x43.dll 文件可以到百度网盘下载：
+
+<https://pan.baidu.com/s/1nuDa0JJ>
