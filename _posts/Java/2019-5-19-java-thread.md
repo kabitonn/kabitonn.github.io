@@ -83,7 +83,7 @@ Jave Thread.State
 - TERMINATED
 
 生命周期
-！[lifecycle](/images/java/lifecycle.png)
+![lifecycle](/images/java/lifecycle.png)
 
 
 线程控制方法
