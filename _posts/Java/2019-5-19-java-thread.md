@@ -83,7 +83,7 @@ Jave Thread.State
 - TERMINATED
 
 生命周期
-！[lifecycle](images/java/lifecycle.png)
+！[lifecycle](/images/java/lifecycle.png)
 
 
 线程控制方法
@@ -104,9 +104,16 @@ Jave Thread.State
 - stop() 
     - 结束线程，不推荐使用
 
+并发：同一个对象对多个线程同时操作  
 线程同步实现方式
 - 同步代码块 synchronized (obj){    } 
 - 同步方法  private synchronized void makeWithdrawal(int amt) {}
+
+- 局部块
+- 构造块
+- 静态块
+- 同步块
+
 
 同步监视器
 - synchronized (obj){    }中的obj称为同步监视器 
@@ -119,6 +126,32 @@ Jave Thread.State
 - 第一个线程访问完毕，解锁同步监视器 
 - 第二个线程访问，发现同步监视器未锁，锁定并访问
 
+操作并发容器 CopyOnWriteArrayList
+
+
+线程通信
+- 协作模型:生产者消费者实现方式一:管程法
+- 协作模型:生产者消费者实现方式二:信号灯法
+
+- wait()   :线程阻塞，释放锁
+- notify() :锁池状态，
+
+volatile保证线程间变量的可见性，但不能保证原子性 
+* DCL单例模式: 懒汉式套路基础上加入并发控制，保证在多线程环境下，对外存在一个对象
+* 1、构造器私有化 -->避免外部new构造器
+* 2、提供私有的静态volatile属性 -->存储对象的地址
+    - 没有volatile其他线程可能访问一个没有初始化的对象(指令重排的原因)
+* 3、提供公共的静态方法 --> 获取属性
+
+ThreadLocal
+- 每个线程自身的存储本地、局部区域
+- 分析上下文 环境  起点
+    * 构造器: 哪里调用 就属于哪里 找线程体
+    * run方法:本线程自身的
+
+可重入锁 ReentrantLock 锁可以延续使用
+不可重入锁  锁不可以延续使用
+
 Lock锁
 - Lock是显式锁（手动开启和关闭锁，别忘记关闭锁），synchronized是隐式锁 
 - Lock只有代码块锁，synchronized有代码块锁和方法锁 
@@ -126,3 +159,9 @@ Lock锁
 
 优先使用顺序： 
 - Lock--同步代码块（已经进入了方法体，分配了相应资源）--同步方法（在方法体之外）
+
+CAS(Compare and Swap) Atomic 原子操作 硬件级别操作
+- 悲观锁：synchronized 独占锁
+- 乐观锁
+
+
