@@ -202,13 +202,34 @@ static关键字
 - 静态初始化块中不能访问非static成员。 
 
 垃圾回收算法
-- 引用计数法
+- 引用计数法 (无法处理循环引用)
+- 复制(Copying)
+- 标记-清除(Mark-Sweep) 暂停应用，内存碎片
+- 标记-整理(Mark-Compact) (标记+复制)
 - 引用可达法(根搜索算法)
 
-通用分代垃圾回收
-- minor GC
-- major GC
-- full GC
+堆划分
+- 新生代
+    - Eden
+    - Survivor(From To)
+- 老年代
+
+分代垃圾收集器
+- 新生代(young)
+    - Serial  一条收集线程 安全点 暂停工作线程 Stop The World 复制算法
+    - ParNew  Serial多线程版本   缩短安全点时间长度  单CPU效率无提高 多CPU 
+    - Parallel Scavenge 关注系统吞吐量    复制算法
+- 老年代(tenred)
+    - CMS(Coucurrent Mark Sweep)  多并发低暂停  标记-清除算法 可与Serial ParNew 共同使用
+    - Serial Old  单线程收集器         标记-整理算法  可与新生代any共同使用
+    - Parallel Old      与Parallel Scavenge共同使用
+- 分区收集器G1(Gabage First)(新老)
+
+
+通用分代垃圾收集器
+- minor GC (年轻代)
+- major GC (老年代)
+- full GC (System.gc()非立即启动)(老年代或持久代堆空间满)
 
 垃圾回收机制关键点
 - 垃圾回收机制只回收JVM堆内存里的对象空间。 
@@ -219,6 +240,8 @@ static关键字
 - 程序员可以通过System.gc()或者Runtime.getRuntime().gc()来通知系统进行垃圾回收，会有一些效果，但是系统是否进行垃圾回收依然不确定。 
 - 垃圾回收机制回收任何对象之前，总会先调用它的finalize方法（如果覆盖该方法，让一 个新的引用变量重新引用该对象，则会重新激活对象）。 
 - 永远不要主动调用某个对象的finalize方法，应该交给垃圾回收机制调用。
+
+
 
 
 ## 基础2
