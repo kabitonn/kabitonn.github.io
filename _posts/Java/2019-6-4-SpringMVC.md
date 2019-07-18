@@ -157,12 +157,13 @@ SpringMVC 环境搭建注解方式
     - 控制器
 - restful 传值方式
     - 简化 jsp 中参数编写格式
-    - 在 jsp 中设定特定的格式 <a href="demo8/123/abc">跳转</a>
+    - 在 jsp 中设定特定的格式 `<a href="demo8/123/abc">`跳转</a>
     - 控制器中
         - 在@RequestMapping 中一定要和请求格式对应
         - {名称} 中名称自定义名称
         - @PathVariable 获取@RequestMapping 中内容,默认按照方法参数名称去寻找
-        ```java
+       
+	   ```java
         @RequestMapping("demo8/{age1}/{name}") 
         public String demo8(@PathVariable String name, @PathVariable("age1") int age){ 
             System.out.println(name +" "+age); 
@@ -178,6 +179,7 @@ SpringMVC 环境搭建注解方式
 视图解析器
 - SpringMVC 会提供默认视图解析器
 - 程序员自定义视图解析器
+	
 	```xml
 		<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 			<property name="prefix" value="/"></property>
@@ -286,7 +288,8 @@ public ModelAndView demo4(){
     - 配置 springmvc.xml  MultipartResovler解析器,异常解析器
     - 编写控制器类
         - MultipartFile 对象名必须和`<input type="file"/>`的 name 属性值相同
-    ```xml
+    
+	```xml
     <!-- MultipartResovler 解析器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="500"></property>
@@ -399,7 +402,7 @@ public ModelAndView demo4(){
 - 通过拦截器拦截全部控制器,需要在拦截器内部放行login控制器
 
 SpringMVC运行原理
-- 如果在web.xml中设置DispatcherServlet 的```<url-pattern>```为/时,当用户发起请求,请求一个控制器,首先会执行DispatcherServlet
+- 如果在web.xml中设置DispatcherServlet 的`<url-pattern>`为/时,当用户发起请求,请求一个控制器,首先会执行DispatcherServlet
 - 由DispatcherServlet调用HandlerMapping的DefaultAnnotationHandlerMapping解析URL,解析后调用HandlerAdatper组件的AnnotationMethodHandlerAdapter，调用Controller中的HandlerMethod
 - 当HandlerMethod执行完成后会返回View,会被 ViewResovler 进行视图解析,解析后调用 jsp 对应的.class 文件并运行,最终把运行.class 文件的结果响应给客户端
 
