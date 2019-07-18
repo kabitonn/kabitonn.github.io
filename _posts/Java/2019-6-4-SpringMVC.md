@@ -57,78 +57,78 @@ Spring 容器和 SpringMVC 容器的关系
 SpringMVC 环境搭建注解方式
 - 导入 jar
 - 在 web.xml 中配置前端控制器 DispatcherServlet
-    - 如果不配置 <init-param> 会在/WEB-INF/<servlet-name>-servlet.xml 
+    - 如果不配置 `<init-param>` 会在/WEB-INF/`<servlet-name>`-servlet.xml 
 - 在 src 下新建 springmvc.xml
     - 引入 xmlns:mvc 命名空间
 - 编写控制器类
 
-```xml
-<!-- web.xml -->
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                       
-    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    
-    <servlet>
-        <servlet-name>springmvc</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!-- 修改配置文件路径和名称 -->
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:springmvc.xml</param-value>
-        </init-param>
-        <!-- 自启动 -->
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-</web-app>
+	```xml
+	<!-- web.xml -->
+	<?xml version="1.0" encoding="UTF-8"?>
+	<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                       
+		http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-<!-- springmvc.xml -->
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <!-- 扫描注解 -->
-    <context:component-scan base-package="com.bjsxt.controller"></context:component-scan>
-    <!-- 注解驱动 -->
-    <!-- org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping -->
-    <!-- org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter -->
-    <mvc:annotation-driven></mvc:annotation-driven>
-    <!-- 静态资源 -->
-    <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
-    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
-    <mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
-</beans>
-```
+		<servlet>
+			<servlet-name>springmvc</servlet-name>
+			<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<!-- 修改配置文件路径和名称 -->
+			<init-param>
+				<param-name>contextConfigLocation</param-name>
+				<param-value>classpath:springmvc.xml</param-value>
+			</init-param>
+			<!-- 自启动 -->
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>springmvc</servlet-name>
+			<url-pattern>/</url-pattern>
+		</servlet-mapping>
+	</web-app>
+
+	<!-- springmvc.xml -->
+	<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		<!-- 扫描注解 -->
+		<context:component-scan base-package="com.bjsxt.controller"></context:component-scan>
+		<!-- 注解驱动 -->
+		<!-- org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping -->
+		<!-- org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter -->
+		<mvc:annotation-driven></mvc:annotation-driven>
+		<!-- 静态资源 -->
+		<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+		<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+		<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
+	</beans>
+	```
 
 字符编码过滤器
 - 在 web.xml 中配置 Filter
-```xml
-    <!-- 字符编码过滤器 -->
-    <filter>
-        <filter-name>encoding</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>utf-8</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>encoding</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-```
+	```xml
+		<!-- 字符编码过滤器 -->
+		<filter>
+			<filter-name>encoding</filter-name>
+			<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+			<init-param>
+				<param-name>encoding</param-name>
+				<param-value>utf-8</param-value>
+			</init-param>
+		</filter>
+		<filter-mapping>
+			<filter-name>encoding</filter-name>
+			<url-pattern>/*</url-pattern>
+		</filter-mapping>
+	```
 
 传参
 - 把内容写到方法(HandlerMethod)参数中,SpringMVC 只要有这个内容,注入内容.
@@ -142,11 +142,17 @@ SpringMVC 环境搭建注解方式
 - 请求参数中包含多个同名参数的获取方式
     - 复选框传递的参数就是多个同名参数 @RequestParam("name")List<String> list
 - 请求参数中对象.属性格式
-    - jsp代码 <input type="text" name="peo.name"/> <input type="text" name="peo.age"/>
+    - jsp代码 `<input type="text" name="peo.name"/> <input type="text" name="peo.age"/>`
     - 新建一个类，对象名和参数中点前面名称对应 public class Demo { private People peo;}
     - 控制器 @RequestMapping("demo6") public String demo6(Demo demo){}
 - 在请求参数中传递集合对象类型参数
-    - jsp 中格式 <input type="text" name="peo[0].name"/> <input type="text" name="peo[0].age"/> <input type="text" name="peo[1].name"/> <input type="text" name="peo[1].age"/>
+    - jsp 中格式 
+    ```jsp
+    <input type="text" name="peo[0].name"/> 
+    <input type="text" name="peo[0].age"/> 
+    <input type="text" name="peo[1].name"/> 
+    <input type="text" name="peo[1].age"/>
+    ```
     - public class Demo { private List<People> peo;}
     - 控制器
 - restful 传值方式
@@ -172,12 +178,12 @@ SpringMVC 环境搭建注解方式
 视图解析器
 - SpringMVC 会提供默认视图解析器
 - 程序员自定义视图解析器
-```xml
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/"></property>
-        <property name="suffix" value=".jsp"></property>
-    </bean>
-```
+	```xml
+		<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<property name="prefix" value="/"></property>
+			<property name="suffix" value=".jsp"></property>
+		</bean>
+	```
 - 如果希望不执行自定义视图解析器,在方法返回值前面添加forward:或 redirect:
 
 
@@ -218,7 +224,7 @@ config     |ServletConfig       |配置信息       |
     - 只要客户端Cookie中传递的Jsessionid不变,Session不会重新实例化(不超过默认时间.)
     - 实际有效时间:
         - 浏览器关闭 Cookie 失效.
-        - 默认时间 在时间范围内无任何交互.在 tomcat 的web.xml 中配置<session-config> <session-timeout>30</session-timeout> </session-config>
+        - 默认时间 在时间范围内无任何交互.在 tomcat 的web.xml 中配置`<session-config> <session-timeout>30</session-timeout> </session-config>`
 - application 只有在 tomcat 启动项目时菜实例化.关闭 tomcat 时销毁application
 
 SpringMVC 作用域传值的几种方式
@@ -270,7 +276,7 @@ public ModelAndView demo4(){
 - MultipartResovler 作用:
     - 把客户端上传的文件流转换成 MutipartFile 封装类.
     - 通过 MutipartFile 封装类获取到文件流
-- 表单数据类型分类,在<form>的 enctype 属性控制表单类型
+- 表单数据类型分类,在`<form>`的 enctype 属性控制表单类型
     - 默认值 application/x-www-form-urlencoded,普通表单数据.(少量文字信息)
     - text/plain 大文字量时使用的类型.邮件,论文
     - multipart/form-data 表单中包含二进制文件内容.
@@ -279,7 +285,7 @@ public ModelAndView demo4(){
     - 编写 JSP 页面 
     - 配置 springmvc.xml  MultipartResovler解析器,异常解析器
     - 编写控制器类
-        - MultipartFile 对象名必须和<input type="file"/>的 name 属性值相同
+        - MultipartFile 对象名必须和`<input type="file"/>`的 name 属性值相同
     ```xml
     <!-- MultipartResovler 解析器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -294,24 +300,23 @@ public ModelAndView demo4(){
         </props>
     </property>
     </bean>
-    
     ```
-    ```java
-@Controller
-public class DemoController {
-    @RequestMapping("upload")
-    public String upload(MultipartFile file,String name) throws IOException{
-        String fileName = file.getOriginalFilename();
-        String suffix = fileName.substring(fileName.lastIndexOf("."));
-        //判断上传文件类型 if(suffix.equalsIgnoreCase(".png"))
-        
-        String uuid = UUID.randomUUID().toString();
-        FileUtils.copyInputStreamToFile(file.getInputStream(), new File("E:/"+uuid+suffix));
-        return "/index.jsp";
-    }
-}
+	
+	```java
+	@Controller
+	public class DemoController {
+		@RequestMapping("upload")
+		public String upload(MultipartFile file,String name) throws IOException{
+			String fileName = file.getOriginalFilename();
+			String suffix = fileName.substring(fileName.lastIndexOf("."));
+			//判断上传文件类型 if(suffix.equalsIgnoreCase(".png"))
 
-    ```
+			String uuid = UUID.randomUUID().toString();
+			FileUtils.copyInputStreamToFile(file.getInputStream(), new File("E:/"+uuid+suffix));
+			return "/index.jsp";
+		}
+	}
+	```
 
 自定义拦截器
 - 跟过滤器比较像的技术.
@@ -323,47 +328,50 @@ public class DemoController {
     - Filter 可以拦截任何请求.
 - 实现自定义拦截器的步骤:
     - 新建类实现 HandlerInterceptor
-    ```java
-public class DemoInterceptor implements HandlerInterceptor {
-    //在进入控制器之前执行
-    //如果返回值为false,阻止进入控制器
-    //控制代码
-    @Override
-    public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
-        System.out.println("arg2:"+arg2);
-        System.out.println("preHandle");
-        return true;
-    }
-    //控制器执行完成,进入到jsp之前执行.
-    //日志记录.
-    //敏感词语过滤
-    @Override
-    public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
-            throws Exception {
-        
-        System.out.println("往"+arg3.getViewName()+"跳转");
-        System.out.println("model的值"+arg3.getModel().get("model"));
-        String word = arg3.getModel().get("model").toString();
-        String newWord = word.replace("祖国", "**");
-        arg3.getModel().put("model", newWord);
-//      arg3.getModel().put("model", "修改后的内容");
-        System.out.println("postHandle");
-    }
-    //jsp执行完成后执行
-    //记录执行过程中出现的异常.
-    //可以把异常记录到日志中
-    @Override
-    public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
-            throws Exception {
-        System.out.println("arg3:"+arg3);
-        System.out.println("afterCompletion"+arg3.getMessage());
-    }
-}
-    ```
-    - 在 springmvc.xml 配置拦截器需要拦截哪些控制器
-        - 拦截所有控制器 
-        - 拦截特定的的url 
-        ```xml
+
+	```java
+	public class DemoInterceptor implements HandlerInterceptor {
+		//在进入控制器之前执行
+		//如果返回值为false,阻止进入控制器
+		//控制代码
+		@Override
+		public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
+			System.out.println("arg2:"+arg2);
+			System.out.println("preHandle");
+			return true;
+		}
+		//控制器执行完成,进入到jsp之前执行.
+		//日志记录.
+		//敏感词语过滤
+		@Override
+		public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
+				throws Exception {
+
+			System.out.println("往"+arg3.getViewName()+"跳转");
+			System.out.println("model的值"+arg3.getModel().get("model"));
+			String word = arg3.getModel().get("model").toString();
+			String newWord = word.replace("祖国", "**");
+			arg3.getModel().put("model", newWord);
+	//      arg3.getModel().put("model", "修改后的内容");
+			System.out.println("postHandle");
+		}
+		//jsp执行完成后执行
+		//记录执行过程中出现的异常.
+		//可以把异常记录到日志中
+		@Override
+		public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
+				throws Exception {
+			System.out.println("arg3:"+arg3);
+			System.out.println("afterCompletion"+arg3.getMessage());
+		}
+	}
+	```
+
+- 在 springmvc.xml 配置拦截器需要拦截哪些控制器
+	- 拦截所有控制器 
+	- 拦截特定的的url 
+
+		```xml
         <mvc:interceptors> 
             <bean class="com.bjsxt.interceptor.DemoInterceptor"></bean>
         </mvc:interceptors>
@@ -373,7 +381,7 @@ public class DemoInterceptor implements HandlerInterceptor {
                 <bean class="com.bjsxt.interceptor.DemoInterceptor"></bean> 
             </mvc:interceptor> 
         </mvc:interceptors>
-        ```
+		```
 
 
 拦截器栈
@@ -391,7 +399,7 @@ public class DemoInterceptor implements HandlerInterceptor {
 - 通过拦截器拦截全部控制器,需要在拦截器内部放行login控制器
 
 SpringMVC运行原理
-- 如果在web.xml中设置DispatcherServlet 的<url-pattern>为/时,当用户发起请求,请求一个控制器,首先会执行DispatcherServlet
+- 如果在web.xml中设置DispatcherServlet 的```<url-pattern>```为/时,当用户发起请求,请求一个控制器,首先会执行DispatcherServlet
 - 由DispatcherServlet调用HandlerMapping的DefaultAnnotationHandlerMapping解析URL,解析后调用HandlerAdatper组件的AnnotationMethodHandlerAdapter，调用Controller中的HandlerMethod
 - 当HandlerMethod执行完成后会返回View,会被 ViewResovler 进行视图解析,解析后调用 jsp 对应的.class 文件并运行,最终把运行.class 文件的结果响应给客户端
 
